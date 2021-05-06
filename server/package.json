@@ -28,5 +28,9 @@
   "bugs": {
     "url": "https://github.com/takaodaze/fakebook/issues"
   },
-  "homepage": "https://github.com/takaodaze/fakebook#readme"
+  "homepage": "https://github.com/takaodaze/fakebook#readme",
+  "dependencies": {
+    "@types/mysql": "^2.15.18",
+    "mysql": "^2.18.1"
+  }
 }
