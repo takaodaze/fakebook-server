@@ -16,7 +16,7 @@ function initTable() {
 
 function create(name: string, uid: string) {
   db.query(`INSERT INTO ${TABLE_NAME} SET ?`, { name, uid }, afterExec);
-  Logger.insertLog(TABLE_NAME, { name, uid });
+  Logger.log("INSERT", TABLE_NAME, { name, uid });
 }
 
 const users = {
