@@ -1,10 +1,10 @@
 import mysql from "mysql";
 
-export function connectDB(
-  host: string,
-  user: string,
-  password: string | undefined
-) {
+const host = "localhost";
+const user = "root";
+const password = "";
+
+function connectDB(host: string, user: string, password: string | undefined) {
   const dbConnect = mysql.createConnection({
     host,
     user,
@@ -22,3 +22,7 @@ export function connectDB(
 
   return dbConnect;
 }
+
+const db = connectDB(host, user, password);
+
+export default db;
