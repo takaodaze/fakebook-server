@@ -3,12 +3,19 @@ import mysql from "mysql";
 const host = "localhost";
 const user = "root";
 const password = "";
+const databaseName = "fakebook";
 
-function connectDB(host: string, user: string, password: string | undefined) {
+export function connectDB(
+  host: string,
+  user: string,
+  password: string | undefined,
+  databaseName: string
+) {
   const dbConnect = mysql.createConnection({
     host,
     user,
     password,
+    database: databaseName,
   });
 
   dbConnect.connect(function (err) {
@@ -16,13 +23,11 @@ function connectDB(host: string, user: string, password: string | undefined) {
       console.error("error connecting: " + err.stack);
       throw new Error("failure db connection");
     }
-
-    console.log("connected mysql!!!");
   });
 
   return dbConnect;
 }
 
-const db = connectDB(host, user, password);
+const db = connectDB(host, user, password, databaseName);
 
 export default db;
