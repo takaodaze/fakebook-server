@@ -22,7 +22,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm --prefix server lint-staged",
-      "pre-push": "npm --prefix server test"
+      "pre-push": "npm --prefix test"
     }
   },
   "lint-staged": {
