@@ -25,7 +25,8 @@
     "test": "jest",
     "test-dev": "jest --watch",
     "eslint": "eslint src/**/*.ts",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -49,7 +50,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn test"
     }
   }
 }
