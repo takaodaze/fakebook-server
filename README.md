@@ -1,4 +1,4 @@
-# fakebook
+# fakebook-server
 
 ## 開発の目的
 
@@ -31,7 +31,7 @@
 
 ## 技術的にハマった点
 
-- husky の設定（v6になってだいぶ変わったみたい。）
+- husky の設定（v6 になってだいぶ変わったみたい。）
 - logger の抽象化
 - callback の例外処理
 - jest + ts の環境構築
