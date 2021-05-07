@@ -34,7 +34,8 @@ test("success insert", async (done) => {
     testDB,
     `SELECT * FROM ${Users.TABLE_NAME}`
   );
-  const actualUser: User = { ...queryResult.results[0] };
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  const actualUser: User = { ...queryResult.results[0] } as User;
   expect(actualUser.uid).toBe(testUser.uid);
   expect(actualUser.password).toBe(testUser.password);
   expect(actualUser.name).toBe(testUser.name);
