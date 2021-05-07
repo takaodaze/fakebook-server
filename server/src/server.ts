@@ -3,6 +3,7 @@ import express from "express";
 import { create } from "./db/Users";
 
 const startServer = async () => {
+  const a = "s";
   const db = await connectProdDB();
   const port = 8000;
   const server = express();
