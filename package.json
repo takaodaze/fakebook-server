@@ -7,7 +7,7 @@
     "server:start-qdev": "npm --prefix run start-dev",
     "server:test": "npm --prefix ./server test",
     "server:lint": "npm --prefix ./server run lint",
-    "lint-staged": "lint-staged",
+    "server:lint-staged": "npm --prefix ./server run lint-staged",
     "prepare": "husky install"
   },
   "repository": {
