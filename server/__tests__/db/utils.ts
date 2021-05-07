@@ -1,5 +1,5 @@
-import { ExecResult } from "db/utils";
-import connectDB from "DBConnecter";
+import { ExecResult } from "src/db/utils";
+import connectDB from "src/DBConnecter";
 import { Connection } from "mysql";
 
 const HOST = "localhost";

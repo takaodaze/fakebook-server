@@ -1,5 +1,5 @@
-import { User } from "db/type";
-import * as Users from "db/Users";
+import { User } from "src/db/type";
+import * as Users from "src/db/Users";
 import { Connection } from "mysql";
 import { connectTestDB, execQuery } from "./utils";
 
