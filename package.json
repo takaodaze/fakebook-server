@@ -26,18 +26,21 @@
     "start": "ts-node -r tsconfig-paths/register src/server.ts",
     "start-dev": "ts-node-dev -r tsconfig-paths/register src/server.ts",
     "test": "jest",
-    "test-dev": "jest --watch"
+    "test-dev": "jest --watch",
+    "lint":"lint src/**/*.{js,ts}",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/takaodaze/fakebook.git"
   },
   "lint-staged": {
-    "server/src/**/*.{js,jsx,ts,tsx,json,css}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{js,css,md}": "prettier --write"
+      "*.{js,ts}": [
+        "eslint --fix --cache",
+        "prettier --write"
+      ],
+      "*.{css,md}": "prettier --write",
+      "*.{js,ts,json}": "prettier --write"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,4 @@
-import { connectProdDB } from "DBConnecter";
+// import { connectProdDB } from "DBConnecter";
 import express from "express";
 
 const startServer = (): void => {
