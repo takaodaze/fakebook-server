@@ -1,6 +1,6 @@
 // source code for practice
 
-import { bi } from "../src/forPracticeCode";
+import { bi } from "../forPracticeCode";
 
 describe("practice test", () => {
   it.skip("test 1.", () => {
