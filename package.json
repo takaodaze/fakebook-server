@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "## 開発の目的 ### 学習 - TS・React のアウトプット - nodeJS のアウトプット - ついでにTS・webpack についての学習",
   "scripts": {
-    "server-start": "npm --prefix server start",
-    "server-start-dev": "npm --prefix server start-dev",
-    "test": "npm --prefix server test",
+    "server:start": "npm --prefix ./server start",
+    "server:start-qdev": "npm --prefix run start-dev",
+    "server:test": "npm --prefix ./server test",
+    "server:lint": "npm --prefix ./server run lint",
     "prepare": "husky install"
   },
   "repository": {
@@ -19,12 +20,6 @@
     "url": "https://github.com/takaodaze/fakebook/issues"
   },
   "homepage": "https://github.com/takaodaze/fakebook#readme",
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm --prefix server lint-staged",
-      "pre-push": "npm --prefix test"
-    }
-  },
   "lint-staged": {
     "server/src/**/*.{js,jsx,ts,tsx,json,css}": [
       "prettier --write"

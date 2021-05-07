@@ -1,6 +1,10 @@
 export type ExecuteType = "INSERT" | "SELECT" | "UPDATE" | "DELETE";
 
-export function log(excuteType: ExecuteType, tableName: string, data: any) {
+export function log(
+  excuteType: ExecuteType,
+  tableName: string,
+  data: { [key: string]: string | number | boolean }
+): void {
   const dataStr = JSON.stringify(data);
   switch (excuteType) {
     case "INSERT":

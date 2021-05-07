@@ -21,17 +21,13 @@ export async function create(
   uid: string,
   name: string,
   password: string
-) {
-  try {
-    await execQuery(db, `INSERT INTO ${TABLE_NAME} SET ?`, {
-      name,
-      uid,
-      password,
-    });
-    Logger.log("INSERT", TABLE_NAME, { name, uid, password });
-  } catch (e) {
-    throw e;
-  }
+): Promise<void> {
+  await execQuery(db, `INSERT INTO ${TABLE_NAME} SET ?`, {
+    name,
+    uid,
+    password,
+  });
+  Logger.log("INSERT", TABLE_NAME, { name, uid, password });
 }
 
 const users = {
