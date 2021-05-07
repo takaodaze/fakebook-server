@@ -10,7 +10,7 @@ export function connectorFactory(
   user: string,
   databaseName: string,
   password?: string
-) {
+): () => Promise<mysql.Connection> {
   const dbConnect = mysql.createConnection({
     host,
     user,

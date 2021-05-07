@@ -26,7 +26,7 @@
     "start-dev": "ts-node-dev -r tsconfig-paths/register src/server.ts",
     "test": "jest",
     "test-dev": "jest --watch",
-    "lint": "eslint src/**/*.ts",
+    "lint": "eslint ./**/*.ts",
     "lint-staged": "lint-staged"
   },
   "repository": {
