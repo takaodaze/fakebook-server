@@ -16,7 +16,8 @@
   "scripts": {
     "start": "ts-node src/server.ts",
     "start-dev": "ts-node-dev src/server.ts",
-    "test": "jest"
+    "test": "jest",
+    "test-dev": "jest --watch"
   },
   "repository": {
     "type": "git",
