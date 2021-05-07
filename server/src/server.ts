@@ -1,9 +1,11 @@
+import connectDB, { connectProdDB } from "DBConnecter";
 import express from "express";
 import DB_API from "./db";
 
-const port = 8000;
+const startServer = async () => {
+  const db = await connectProdDB();
 
-DB_API.Users.create("gin2798@gmail.com", "gin");
-
-const server = express();
-server.listen(port);
+  const port = 8000;
+  const server = express();
+  server.listen(port);
+};

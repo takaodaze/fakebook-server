@@ -1,10 +1,18 @@
-import { Connection, FieldInfo } from "mysql";
+import { ExecResult } from "db/utils";
+import connectDB from "DBConnecter";
+import { Connection } from "mysql";
 
-export type ExecResult = {
-  results: any;
-  // fields に select の結果などが入るみたい...
-  fields?: FieldInfo[];
-};
+const HOST = "localhost";
+const USER = "root";
+const PASSWORD = "";
+const TEST_DATABASE_NAME = "fakebook_test";
+
+export const connectTestDB = connectDB(
+  HOST,
+  USER,
+  TEST_DATABASE_NAME,
+  PASSWORD
+);
 
 export const execQuery = (
   db: Connection,
