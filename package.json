@@ -5,7 +5,8 @@
   "scripts": {
     "server-start": "npm --prefix server start",
     "server-start-dev": "npm --prefix server start-dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm --prefix server test",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,22 @@
   "bugs": {
     "url": "https://github.com/takaodaze/fakebook/issues"
   },
-  "homepage": "https://github.com/takaodaze/fakebook#readme"
+  "homepage": "https://github.com/takaodaze/fakebook#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm --prefix server lint-staged",
+      "pre-push": "npm --prefix server test"
+    }
+  },
+  "lint-staged": {
+    "server/src/**/*.{js,jsx,ts,tsx,json,css}": [
+      "prettier --write"
+    ],
+    "*.{js,css,md}": "prettier --write"
+  },
+  "devDependencies": {
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1"
+  }
 }
