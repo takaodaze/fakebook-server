@@ -1,4 +1,4 @@
-import { execQuery } from "./utils";
+import { execQuery, ExecResult } from "./utils";
 import * as Logger from "./logger";
 import { Connection } from "mysql";
 
@@ -12,8 +12,8 @@ export const initTableSql = `
     )
 `;
 
-export async function initTable(db: Connection) {
-  await execQuery(db, initTableSql);
+export async function initTable(db: Connection): Promise<ExecResult> {
+  return await execQuery(db, initTableSql);
 }
 
 export async function create(
@@ -21,17 +21,13 @@ export async function create(
   uid: string,
   name: string,
   password: string
-) {
-  try {
-    await execQuery(db, `INSERT INTO ${TABLE_NAME} SET ?`, {
-      name,
-      uid,
-      password,
-    });
-    Logger.log("INSERT", TABLE_NAME, { name, uid, password });
-  } catch (e) {
-    throw e;
-  }
+): Promise<void> {
+  await execQuery(db, `INSERT INTO ${TABLE_NAME} SET ?`, {
+    name,
+    uid,
+    password,
+  });
+  Logger.log("INSERT", TABLE_NAME, { name, uid, password });
 }
 
 const users = {

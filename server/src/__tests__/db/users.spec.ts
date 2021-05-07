@@ -9,14 +9,12 @@ const insertUser = async (db: Connection, testUser: User) => {
 
 let testDB: Connection | null;
 
-beforeAll(async (done) => {
+beforeAll(async () => {
   testDB = await connectTestDB();
   if (testDB == null) {
     throw new Error("failure connection db");
   }
-  testDB.query(Users.initTableSql, (_error, _results, _fileds) => {
-    done();
-  });
+  await execQuery(testDB, Users.initTableSql);
 });
 
 test("success insert", async (done) => {
@@ -43,7 +41,7 @@ test("success insert", async (done) => {
   done();
 });
 
-test.skip("duplicate uid", async () => {
+test("duplicate uid", async () => {
   if (testDB == null) {
     throw new Error("failure connection db");
   }
@@ -58,13 +56,10 @@ test.skip("duplicate uid", async () => {
   await expect(insertUser(testDB, testUser)).rejects.toThrow(Error);
 });
 
-afterAll((done) => {
+afterAll(async () => {
   if (testDB == null) {
     throw new Error("failure connection db");
   }
-  testDB.query(`DROP TABLE ${Users.TABLE_NAME}`, () => {
-    // これがないと jest から怒られる!!!
-    testDB?.end();
-    done();
-  });
+  await execQuery(testDB, `DROP TABLE ${Users.TABLE_NAME}`);
+  testDB.end();
 });
