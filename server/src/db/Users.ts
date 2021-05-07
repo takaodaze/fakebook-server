@@ -1,5 +1,5 @@
 import db from "../DBConnecter";
-import { afterExec } from "./utils";
+import { execQuery } from "./utils";
 import * as Logger from "./logger";
 
 const TABLE_NAME = "users";
@@ -11,12 +11,16 @@ function initTable() {
       name VARCHAR(20)
     )
   `;
-  db.query(sql, afterExec);
+  execQuery(sql);
 }
 
-function create(name: string, uid: string) {
-  db.query(`INSERT INTO ${TABLE_NAME} SET ?`, { name, uid }, afterExec);
-  Logger.log("INSERT", TABLE_NAME, { name, uid });
+async function create(uid: string, name: string) {
+  try {
+    await execQuery(`INSERT INTO ${TABLE_NAME} SET ?`, { name, uid });
+    Logger.log("INSERT", TABLE_NAME, { name, uid });
+  } catch (e) {
+    console.log("error:", e);
+  }
 }
 
 const users = {

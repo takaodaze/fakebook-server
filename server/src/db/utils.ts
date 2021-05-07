@@ -1,6 +1,15 @@
-export function afterExec(error: any, results: any, fields: any) {
-  if (error) {
-    throw error;
-  }
-  console.log("executed SQL:", results);
-}
+import db from "../DBConnecter";
+
+export const execQuery = (
+  statement: string,
+  params?: { [key: string]: string }
+) => {
+  return new Promise<any>((resolve, reject) => {
+    db.query(statement, params, (err, results, fields) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(results);
+    });
+  });
+};
