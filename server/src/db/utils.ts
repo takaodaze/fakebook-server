@@ -2,7 +2,6 @@ import { Connection, FieldInfo } from "mysql";
 
 export type ExecResult = {
   results: any;
-  // fields に select の結果などが入るみたい...
   fields?: FieldInfo[];
 };
 
@@ -12,6 +11,7 @@ export const execQuery = (
   params?: { [key: string]: string }
 ) => {
   return new Promise<ExecResult>((resolve, reject) => {
+    //
     db.query(statement, params, (err, results, fields) => {
       if (err) {
         reject(err);

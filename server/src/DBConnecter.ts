@@ -5,7 +5,7 @@ const USER = "root";
 const PASSWORD = "";
 const DATABASE_NAME = "fakebook";
 
-export default function connectDB(
+export function connectorFactory(
   host: string,
   user: string,
   databaseName: string,
@@ -32,4 +32,9 @@ export default function connectDB(
   return connect;
 }
 
-export const connectProdDB = connectDB(HOST, USER, DATABASE_NAME, PASSWORD);
+export const connectProdDB = connectorFactory(
+  HOST,
+  USER,
+  DATABASE_NAME,
+  PASSWORD
+);

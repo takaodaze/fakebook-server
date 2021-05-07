@@ -1,5 +1,5 @@
-import { ExecResult } from "src/db/utils";
-import connectDB from "src/DBConnecter";
+import { ExecResult } from "db/utils";
+import { connectorFactory } from "DBConnecter";
 import { Connection } from "mysql";
 
 const HOST = "localhost";
@@ -7,7 +7,7 @@ const USER = "root";
 const PASSWORD = "";
 const TEST_DATABASE_NAME = "fakebook_test";
 
-export const connectTestDB = connectDB(
+export const connectTestDB = connectorFactory(
   HOST,
   USER,
   TEST_DATABASE_NAME,
