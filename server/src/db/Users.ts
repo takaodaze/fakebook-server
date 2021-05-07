@@ -1,25 +1,36 @@
-import db from "../DBConnecter";
 import { execQuery } from "./utils";
 import * as Logger from "./logger";
+import { Connection } from "mysql";
 
-const TABLE_NAME = "users";
+export const TABLE_NAME = "users";
 
-function initTable() {
-  const sql = `
+export const initTableSql = `
     CREATE TABLE users (
-      uid VARCHAR(100),
-      name VARCHAR(20)
+      uid VARCHAR(100) NOT NULL PRIMARY KEY,
+      password VARCHAR(20) NOT NULL,
+      name VARCHAR(20) NOT NULL
     )
-  `;
-  execQuery(sql);
+`;
+
+export async function initTable(db: Connection) {
+  await execQuery(db, initTableSql);
 }
 
-async function create(uid: string, name: string) {
+export async function create(
+  db: Connection,
+  uid: string,
+  name: string,
+  password: string
+) {
   try {
-    await execQuery(`INSERT INTO ${TABLE_NAME} SET ?`, { name, uid });
-    Logger.log("INSERT", TABLE_NAME, { name, uid });
+    await execQuery(db, `INSERT INTO ${TABLE_NAME} SET ?`, {
+      name,
+      uid,
+      password,
+    });
+    Logger.log("INSERT", TABLE_NAME, { name, uid, password });
   } catch (e) {
-    console.log("error:", e);
+    throw e;
   }
 }
 

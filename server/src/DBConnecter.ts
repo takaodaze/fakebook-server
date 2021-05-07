@@ -1,15 +1,15 @@
 import mysql from "mysql";
 
-const host = "localhost";
-const user = "root";
-const password = "";
-const databaseName = "fakebook";
+const HOST = "localhost";
+const USER = "root";
+const PASSWORD = "";
+const DATABASE_NAME = "fakebook";
 
-export function connectDB(
+export default function connectDB(
   host: string,
   user: string,
-  password: string | undefined,
-  databaseName: string
+  databaseName: string,
+  password?: string
 ) {
   const dbConnect = mysql.createConnection({
     host,
@@ -18,16 +18,18 @@ export function connectDB(
     database: databaseName,
   });
 
-  dbConnect.connect(function (err) {
-    if (err) {
-      console.error("error connecting: " + err.stack);
-      throw new Error("failure db connection");
-    }
-  });
+  const connect = () => {
+    return new Promise<mysql.Connection>((resolve, reject) => {
+      dbConnect.connect((err) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(dbConnect);
+      });
+    });
+  };
 
-  return dbConnect;
+  return connect;
 }
 
-const db = connectDB(host, user, password, databaseName);
-
-export default db;
+export const connectProdDB = connectDB(HOST, USER, DATABASE_NAME, PASSWORD);
