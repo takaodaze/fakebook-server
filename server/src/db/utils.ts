@@ -1,7 +1,8 @@
 import { Connection, FieldInfo } from "mysql";
 
 export type ExecResult = {
-  results: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  results: any;
   fields?: FieldInfo[];
 };
 
