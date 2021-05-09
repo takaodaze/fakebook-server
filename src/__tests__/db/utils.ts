@@ -14,18 +14,34 @@ export const connectTestDB = connectorFactory(
   PASSWORD
 );
 
-export const execQuery = (
-  db: Connection,
+export type ExecQueryFunc = (
   statement: string,
   params?: { [key: string]: string }
-): Promise<ExecResult> => {
-  return new Promise<ExecResult>((resolve, reject) => {
-    db.query(statement, params, (err, results, fields) => {
-      if (err) {
-        reject(err);
-      }
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      resolve({ results, fields });
+) => Promise<ExecResult>;
+
+export const execQueryFactory = (db: Connection): ExecQueryFunc => {
+  const execQuery: ExecQueryFunc = (statement, params) => {
+    return new Promise<ExecResult>((resolve, reject) => {
+      db.query(statement, params, (err, results, fields) => {
+        if (err) {
+          reject(err);
+        }
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        resolve({ results, fields });
+      });
     });
-  });
+  };
+
+  return execQuery;
+};
+
+export const dropTableUtil = async (
+  execQuery: ExecQueryFunc,
+  tableName: string
+): Promise<ExecResult> => {
+  return await execQuery(`DROP TABLE ${tableName}`);
+};
+
+export const DBConnectionError = (): Error => {
+  return new Error("failure connection db");
 };

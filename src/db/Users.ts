@@ -12,7 +12,7 @@ export const initTableSql = `
     )
 `;
 
-export async function initTable(db: Connection): Promise<ExecResult> {
+export async function createTable(db: Connection): Promise<ExecResult> {
   return await execQuery(db, initTableSql);
 }
 
@@ -21,17 +21,18 @@ export async function create(
   uid: string,
   name: string,
   password: string
-): Promise<void> {
-  await execQuery(db, `INSERT INTO ${TABLE_NAME} SET ?`, {
+): Promise<ExecResult> {
+  const result = await execQuery(db, `INSERT INTO ${TABLE_NAME} SET ?`, {
     name,
     uid,
     password,
   });
   Logger.log("INSERT", TABLE_NAME, { name, uid, password });
+  return result;
 }
 
 const users = {
-  initTable,
+  createTable,
   create,
 };
 
