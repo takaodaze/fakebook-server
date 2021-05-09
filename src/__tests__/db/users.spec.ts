@@ -6,7 +6,6 @@ import {
   dropTableUtil,
   execQueryFactory,
   ExecQueryFunc,
-  DBConnectionError,
 } from "./utils";
 
 const insertUser = async (db: Connection, testUser: User) => {
@@ -18,9 +17,6 @@ let execQuery: ExecQueryFunc;
 
 beforeAll(async () => {
   testDB = await connectTestDB();
-  if (testDB == null) {
-    throw DBConnectionError();
-  }
   execQuery = execQueryFactory(testDB);
   await execQuery(Users.initTableSql);
 });
@@ -57,13 +53,10 @@ test("duplicate uid", async () => {
   };
   await expect(insertUser(testDB, testUser)).resolves.toEqual(undefined);
   // 同じuidの場合例外がおこる
-  await expect(insertUser(testDB, testUser)).rejects.toThrow(Error);
+  await expect(insertUser(testDB, testUser)).rejects.toThrowError();
 });
 
 afterAll(async () => {
-  if (testDB == null) {
-    throw new Error("failure connection db");
-  }
   await dropTableUtil(execQuery, Users.TABLE_NAME);
   testDB.end();
 });
