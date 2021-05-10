@@ -26,3 +26,10 @@ export async function create(
   Logger.log("INSERT", TABLE_NAME, data);
   return result;
 }
+
+const posts = {
+  createTable,
+  create,
+};
+
+export default posts;
